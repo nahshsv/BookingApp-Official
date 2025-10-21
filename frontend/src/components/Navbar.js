@@ -6,8 +6,9 @@ export default function Navbar() {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [navHeight, setNavHeight] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  // ✅ Tự động lấy chiều cao navbar
+  // ✅ Lấy chiều cao navbar khi resize
   useEffect(() => {
     const navbar = document.getElementById("main-navbar");
     if (navbar) {
@@ -22,65 +23,77 @@ export default function Navbar() {
     }
   }, []);
 
+  // ✅ Theo dõi scroll, fix bug border & giữ navbar luôn hiện
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY < 10) {
+        // Khi ở đầu trang → trong suốt, không border
+        setIsScrolled(false);
+      } else {
+        // Khi cuộn xuống → có blur và border
+        setIsScrolled(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // ✅ Cuộn mượt đến section
   const scrollToSection = (id) => {
-  navigate("/");
-  setTimeout(() => {
-    const section = document.getElementById(id);
-    if (section) {
-      const sectionTop = section.getBoundingClientRect().top + window.scrollY;
-      const targetScroll = sectionTop - navHeight;
-
-      window.scrollTo({
-        top: targetScroll < 0 ? 0 : targetScroll, // tránh scroll âm
-        behavior: "smooth",
-      });
-    }
-  }, 300);
-  setMenuOpen(false);
-};
-
-
+    navigate("/");
+    setTimeout(() => {
+      const section = document.getElementById(id);
+      if (section) {
+        const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+        const targetScroll = sectionTop - navHeight;
+        window.scrollTo({
+          top: targetScroll < 0 ? 0 : targetScroll,
+          behavior: "smooth",
+        });
+      }
+    }, 300);
+    setMenuOpen(false);
+  };
 
   return (
     <nav
       id="main-navbar"
-      className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-md transition-all duration-300"
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+        isScrolled
+          ? "bg-white/45 backdrop-blur-xl border-b border-white/10 shadow-sm"
+          : "bg-transparent backdrop-blur-none border-none shadow-none"
+      }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-between">
         {/* ✨ Logo */}
         <h1
           onClick={() => scrollToSection("home_pic")}
-          className="text-lg sm:text-2xl font-bold text-zinc-900 cursor-pointer select-none whitespace-nowrap"
+          className={`text-lg sm:text-2xl font-bold cursor-pointer select-none whitespace-nowrap transition-colors duration-300 ${
+            isScrolled ? "text-zinc-900" : "text-white drop-shadow"
+          }`}
         >
           ✨ Nails by Jessie
         </h1>
 
         {/* 🖥 Desktop menu */}
         <div className="hidden sm:flex space-x-6">
-          <button
-            onClick={() => scrollToSection("home_pic")}
-            className="text-zinc-900 transition font-medium"
-          >
-            Home
-          </button>
-          <button
-            onClick={() => scrollToSection("about")}
-            className="text-zinc-900  transition font-medium"
-          >
-            About
-          </button>
-          <button
-            onClick={() => scrollToSection("services")}
-            className="text-zinc-900 transition font-medium"
-          >
-            Service
-          </button>
-          <button
-            onClick={() => scrollToSection("gallery")}
-            className="text-zinc-900 hover:text-pink-600transition font-medium"
-          >
-            Gallery
-          </button>
+          {["home_pic", "about", "services", "gallery"].map((id, index) => {
+            const labels = ["Home", "About", "Service", "Gallery"];
+            return (
+              <button
+                key={id}
+                onClick={() => scrollToSection(id)}
+                className={`transition font-medium ${
+                  isScrolled
+                    ? "text-zinc-900 hover:text-amber-600"
+                    : "text-white hover:text-amber-300"
+                }`}
+              >
+                {labels[index]}
+              </button>
+            );
+          })}
         </div>
 
         {/* 📱 Mobile menu toggle */}
@@ -89,41 +102,47 @@ export default function Navbar() {
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? (
-            <X className="h-6 w-6 text-zinc-900" />
+            <X
+              className={`h-6 w-6 transition ${
+                isScrolled ? "text-zinc-900" : "text-white"
+              }`}
+            />
           ) : (
-            <Menu className="h-6 w-6 text-zinc-900" />
+            <Menu
+              className={`h-6 w-6 transition ${
+                isScrolled ? "text-zinc-900" : "text-white"
+              }`}
+            />
           )}
         </button>
       </div>
 
       {/* 📱 Mobile dropdown */}
       {menuOpen && (
-        <div className="sm:hidden bg-white/95 backdrop-blur-md border-t shadow-md animate-slideDown">
+        <div
+          className={`sm:hidden border-t animate-slideDown ${
+            isScrolled
+              ? "bg-white/90 backdrop-blur-md shadow-md"
+              : "bg-zinc-900/80 backdrop-blur-lg"
+          }`}
+        >
           <div className="flex flex-col items-center py-4 space-y-3">
-            <button
-              onClick={() => scrollToSection("home_pic")}
-              className="text-gray-800 font-medium transition"
-            >
-              Home
-            </button>
-            <button
-              onClick={() => scrollToSection("about")}
-              className="text-gray-800  font-medium transition"
-            >
-              About
-            </button>
-            <button
-              onClick={() => scrollToSection("services")}
-              className="text-gray-800  font-medium transition"
-            >
-              Service
-            </button>
-            <button
-              onClick={() => scrollToSection("gallery")}
-              className="text-gray-800  font-medium transition"
-            >
-              Gallery
-            </button>
+            {["home_pic", "about", "services", "gallery"].map((id, index) => {
+              const labels = ["Home", "About", "Service", "Gallery"];
+              return (
+                <button
+                  key={id}
+                  onClick={() => scrollToSection(id)}
+                  className={`font-medium transition ${
+                    isScrolled
+                      ? "text-zinc-800 hover:text-amber-600"
+                      : "text-white hover:text-amber-300"
+                  }`}
+                >
+                  {labels[index]}
+                </button>
+              );
+            })}
           </div>
         </div>
       )}
