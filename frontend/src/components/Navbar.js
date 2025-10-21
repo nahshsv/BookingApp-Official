@@ -52,7 +52,7 @@ export default function Navbar() {
           onClick={() => scrollToSection("home_pic")}
           className="text-lg sm:text-2xl font-bold text-zinc-900 cursor-pointer select-none whitespace-nowrap"
         >
-          ✨ Nails by Oni
+          ✨ Nails by Jessie
         </h1>
 
         {/* 🖥 Desktop menu */}

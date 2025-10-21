@@ -71,7 +71,7 @@ export default function Footer() {
 
       {/* 🔸 Dòng bản quyền */}
       <div className="mt-10 text-center text-gray-400 text-sm border-t border-gray-700 pt-4">
-        © {new Date().getFullYear()} Nails by Oni. All rights reserved.
+        © {new Date().getFullYear()} Nails by Jessie. All rights reserved.
       </div>
     </footer>
   );
