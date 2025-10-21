@@ -81,6 +81,15 @@ export default function HomePage() {
       <p className="text-base sm:text-lg md:text-xl text-gray-200 max-w-2xl mx-auto drop-shadow-md">
         From classic to creative — every design is made with love & care.
       </p>
+       <div className="mt-12 flex justify-center">
+  <button
+    onClick={() => navigate("/client")}
+    className="px-8 py-3 sm:px-10 sm:py-4 bg-zinc-100 text-zinc-900 font-semibold text-lg sm:text-xl rounded-xl shadow-md border border-zinc-300 hover:bg-zinc-100 hover:scale-105 hover:shadow-lg transition-all duration-300"
+  >
+    Book Appointment
+  </button>
+</div>
+
     </div>
   </section>
 
@@ -107,7 +116,7 @@ export default function HomePage() {
           className="font-extrabold tracking-tight text-[2.5rem] sm:text-[3.5rem] md:text-[6rem] lg:text-[7rem] leading-[0.9]"
           style={{ letterSpacing: "-1px" }}
         >
-          ONI
+          JESSIE
           <br />
           NGUYEN
         </h1>
@@ -134,7 +143,7 @@ export default function HomePage() {
         <img
           src="/pics/OniBlack.png"
           alt="Oni portrait"
-          className="w-[80%] sm:w-[70%] md:w-[85%] lg:w-[95%] max-w-[600px] object-contain md:object-cover drop-shadow-xl"
+          className="w-[80%] sm:w-[70%] md:w-[85%] lg:w-[85%] max-w-[600px] object-contain md:object-cover drop-shadow-xl"
           style={{
             filter: "brightness(1) contrast(1.05)",
           }}
@@ -191,15 +200,6 @@ export default function HomePage() {
           ))}
         </div>
 
-        {/* Centered button */}
-        <div className="mt-12 flex justify-center">
-          <button
-            onClick={() => navigate("/client")}
-            className="px-8 py-3 sm:px-10 sm:py-4 bg-gradient-to-r from-zinc-900 to-neutral-800 hover:scale-105 hover:shadow-xl rounded-xl text-white font-semibold text-lg sm:text-xl shadow-md transition-all duration-300"
-          >
-            Book Appointment
-          </button>
-        </div>
       </section>
 
       {/* 📸 Gallery Section */}

@@ -41,7 +41,7 @@ export default function Footer() {
               href="https://www.facebook.com/"
               target="_blank"
               rel="noreferrer"
-              className="hover:text-pink-400 bg-white/10 p-3 rounded-full transition hover:shadow-[0_0_10px_#ec4899]"
+              className=" bg-white/10 p-3 rounded-full transition "
             >
               <i className="fab fa-facebook"></i>
             </a>
@@ -49,19 +49,19 @@ export default function Footer() {
               href="https://www.instagram.com/"
               target="_blank"
               rel="noreferrer"
-              className="hover:text-pink-400 bg-white/10 p-3 rounded-full transition hover:shadow-[0_0_10px_#ec4899]"
+              className=" bg-white/10 p-3 rounded-full transition "
             >
               <i className="fab fa-instagram"></i>
             </a>
             <a
               href="tel:+11234567890"
-              className="hover:text-pink-400 bg-white/10 p-3 rounded-full transition hover:shadow-[0_0_10px_#ec4899]"
+              className=" bg-white/10 p-3 rounded-full transition"
             >
               <i className="fas fa-phone"></i>
             </a>
             <a
               href="mailto:binggracenails@gmail.com"
-              className="hover:text-pink-400 bg-white/10 p-3 rounded-full transition hover:shadow-[0_0_10px_#ec4899]"
+              className="bg-white/10 p-3 rounded-full transition "
             >
               <i className="fas fa-envelope"></i>
             </a>

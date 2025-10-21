@@ -23,18 +23,23 @@ export default function Navbar() {
   }, []);
 
   const scrollToSection = (id) => {
-    navigate("/");
-    setTimeout(() => {
-      const section = document.getElementById(id);
-      if (section) {
-        window.scrollTo({
-          top: section.offsetTop - navHeight,
-          behavior: "smooth",
-        });
-      }
-    }, 300);
-    setMenuOpen(false);
-  };
+  navigate("/");
+  setTimeout(() => {
+    const section = document.getElementById(id);
+    if (section) {
+      const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+      const targetScroll = sectionTop - navHeight;
+
+      window.scrollTo({
+        top: targetScroll < 0 ? 0 : targetScroll, // tránh scroll âm
+        behavior: "smooth",
+      });
+    }
+  }, 300);
+  setMenuOpen(false);
+};
+
+
 
   return (
     <nav
@@ -54,25 +59,25 @@ export default function Navbar() {
         <div className="hidden sm:flex space-x-6">
           <button
             onClick={() => scrollToSection("home_pic")}
-            className="text-zinc-900 hover:text-pink-600 transition font-medium"
+            className="text-zinc-900 transition font-medium"
           >
             Home
           </button>
           <button
             onClick={() => scrollToSection("about")}
-            className="text-zinc-900 hover:text-pink-600 transition font-medium"
+            className="text-zinc-900  transition font-medium"
           >
             About
           </button>
           <button
             onClick={() => scrollToSection("services")}
-            className="text-zinc-900 hover:text-pink-600 transition font-medium"
+            className="text-zinc-900 transition font-medium"
           >
             Service
           </button>
           <button
             onClick={() => scrollToSection("gallery")}
-            className="text-zinc-900 hover:text-pink-600 transition font-medium"
+            className="text-zinc-900 hover:text-pink-600transition font-medium"
           >
             Gallery
           </button>
@@ -80,7 +85,7 @@ export default function Navbar() {
 
         {/* 📱 Mobile menu toggle */}
         <button
-          className="sm:hidden p-2 rounded-md hover:bg-pink-100 transition"
+          className="sm:hidden p-2 rounded-md transition"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? (
@@ -93,29 +98,29 @@ export default function Navbar() {
 
       {/* 📱 Mobile dropdown */}
       {menuOpen && (
-        <div className="sm:hidden bg-white/95 backdrop-blur-md border-t border-pink-100 shadow-md animate-slideDown">
+        <div className="sm:hidden bg-white/95 backdrop-blur-md border-t shadow-md animate-slideDown">
           <div className="flex flex-col items-center py-4 space-y-3">
             <button
               onClick={() => scrollToSection("home_pic")}
-              className="text-gray-800 hover:text-pink-600 font-medium transition"
+              className="text-gray-800 font-medium transition"
             >
               Home
             </button>
             <button
               onClick={() => scrollToSection("about")}
-              className="text-gray-800 hover:text-pink-600 font-medium transition"
+              className="text-gray-800  font-medium transition"
             >
               About
             </button>
             <button
               onClick={() => scrollToSection("services")}
-              className="text-gray-800 hover:text-pink-600 font-medium transition"
+              className="text-gray-800  font-medium transition"
             >
               Service
             </button>
             <button
               onClick={() => scrollToSection("gallery")}
-              className="text-gray-800 hover:text-pink-600 font-medium transition"
+              className="text-gray-800  font-medium transition"
             >
               Gallery
             </button>
