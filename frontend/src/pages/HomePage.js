@@ -228,38 +228,49 @@ useEffect(() => {
         </p>
 
         <div className="relative max-w-6xl mx-auto px-4 sm:px-8">
-  {/* Mobile Carousel */}
-  <div className="block sm:hidden relative overflow-hidden rounded-2xl">
+  <div className="block sm:hidden">
+  <div className="relative overflow-hidden rounded-2xl">
     <div
-      className="flex transition-transform duration-500"
-      style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+      className="flex transition-transform duration-500 ease-out will-change-transform"
+      style={{ transform: `translate3d(-${currentIndex * 100}%,0,0)` }}
     >
       {images.map((src, i) => (
-        <div key={i} className="min-w-full flex-shrink-0">
-          <img
-            src={src}
-            alt={`Nail design ${i + 1}`}
-            className="w-full h-64 object-cover rounded-2xl"
-            onClick={() => setIndex(i)}
-          />
+        <div key={i} className="relative w-full basis-full shrink-0">
+          {/* Khung tỉ lệ cố định: đổi 4/3 -> 3/2 hoặc 16/9 tùy bạn muốn ít crop hơn */}
+          <div className="relative w-full aspect-[4/3]">
+            <img
+              src={src}
+              alt={`Nail design ${i + 1}`}
+              className="absolute inset-0 w-full h-full object-cover block select-none"
+              onClick={() => setIndex(i)}
+              draggable={false}
+            />
+          </div>
         </div>
       ))}
     </div>
 
     {/* Buttons */}
     <button
-      onClick={() => setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))}
+      onClick={() =>
+        setCurrentIndex((p) => (p === 0 ? images.length - 1 : p - 1))
+      }
       className="absolute top-1/2 left-3 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full"
     >
       ‹
     </button>
     <button
-      onClick={() => setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))}
+      onClick={() =>
+        setCurrentIndex((p) => (p === images.length - 1 ? 0 : p + 1))
+      }
       className="absolute top-1/2 right-3 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full"
     >
       ›
     </button>
   </div>
+</div>
+
+
 
   {/* Desktop Grid */}
   <div className="hidden sm:grid grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 mt-6">
