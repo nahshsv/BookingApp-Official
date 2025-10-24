@@ -100,8 +100,8 @@ export default function Navbar() {
               onClick={() => scrollToSection(item.id)}
               className={`transition font-medium duration-300 ${
                 isScrolled || isClientPage
-                  ? "text-zinc-900 hover:text-amber-600"
-                  : "text-white hover:text-amber-300"
+                  ? "text-zinc-900"
+                  : "text-white"
               }`}
             >
               {item.label}
