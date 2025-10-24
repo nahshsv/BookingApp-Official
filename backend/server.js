@@ -123,6 +123,8 @@ app.get("/my-appointments", authMiddleware, async (req, res) => {
     res.status(500).send(err);
   }
 });
+const commentRoutes = require("./routes/comment");
+app.use("/comments", commentRoutes);
 
 // 🚫 comment route cũ để tránh trùng /book
 // app.post("/book", authMiddleware, async (req, res) => { ... });

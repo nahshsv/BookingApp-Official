@@ -1,9 +1,8 @@
 export default function Footer() {
   return (
-    <footer className="bg-[#18181B] text-white py-12">
-      {/* Grid 3 cột, các cột đều nhau */}
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-10 text-center place-items-center">
-
+    <footer className="bg-[#18181B] text-white pt-12 pb-6">
+      {/* Grid 3 cột */}
+      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-10 text-center md:text-left place-items-center">
         {/* 🔹 Cột 1: Google Map */}
         <div className="rounded-xl overflow-hidden shadow-md border border-gray-700 w-[90%] md:w-[80%]">
           <iframe
@@ -18,12 +17,12 @@ export default function Footer() {
           ></iframe>
         </div>
 
-        {/* 🔹 Cột 2: Thông tin liên hệ (Căn trái) */}
+        {/* 🔹 Cột 2: Thông tin liên hệ */}
         <div className="flex flex-col items-start text-left">
           <h3 className="text-2xl font-semibold mb-4 text-gray-300">
             <a href="/admin-login">Nails by Oni</a>
           </h3>
-          <ul className="space-y-2 text-gray-300">
+          <ul className="space-y-2 text-gray-300 text-base">
             <li>📍 2512 Ridgmar Blvd, Fort Worth, TX 76116</li>
             <li>📞 (123) 456-7890</li>
             <li>📧 binggracenails@gmail.com</li>
@@ -32,16 +31,14 @@ export default function Footer() {
         </div>
 
         {/* 🔹 Cột 3: Social Links */}
-        <div className="flex flex-col items-center text-center">
-          <h3 className="text-2xl font-semibold mb-4 text-gray-300">
-            Follow Us 
-          </h3>
-          <div className="flex justify-center gap-6 text-2xl">
+        <div className="flex flex-col items-center md:items-start">
+          <h3 className="text-2xl font-semibold mb-4 text-gray-300">Follow Us</h3>
+          <div className="flex gap-5 text-2xl">
             <a
               href="https://www.facebook.com/"
               target="_blank"
               rel="noreferrer"
-              className=" bg-white/10 p-3 rounded-full transition "
+              className="bg-white/10 p-3 rounded-full hover:bg-amber-500/30 transition"
             >
               <i className="fab fa-facebook"></i>
             </a>
@@ -49,19 +46,19 @@ export default function Footer() {
               href="https://www.instagram.com/"
               target="_blank"
               rel="noreferrer"
-              className=" bg-white/10 p-3 rounded-full transition "
+              className="bg-white/10 p-3 rounded-full hover:bg-amber-500/30 transition"
             >
               <i className="fab fa-instagram"></i>
             </a>
             <a
               href="tel:+11234567890"
-              className=" bg-white/10 p-3 rounded-full transition"
+              className="bg-white/10 p-3 rounded-full hover:bg-amber-500/30 transition"
             >
               <i className="fas fa-phone"></i>
             </a>
             <a
               href="mailto:binggracenails@gmail.com"
-              className="bg-white/10 p-3 rounded-full transition "
+              className="bg-white/10 p-3 rounded-full hover:bg-amber-500/30 transition"
             >
               <i className="fas fa-envelope"></i>
             </a>
@@ -70,8 +67,10 @@ export default function Footer() {
       </div>
 
       {/* 🔸 Dòng bản quyền */}
-      <div className="mt-10 text-center text-gray-400 text-sm border-t border-gray-700 pt-4">
-        © {new Date().getFullYear()} Nails by Jessie. All rights reserved.
+      <div className="max-w-7xl mx-auto mt-10 pt-6 border-t border-gray-700 text-center">
+        <p className="text-gray-400 text-sm sm:text-base tracking-wide">
+          © {new Date().getFullYear()} Nails by Jessie. All rights reserved.
+        </p>
       </div>
     </footer>
   );
